@@ -20,11 +20,6 @@ try:
 	ygg.send(getSessions)
 	getSessions_data = json.loads(ygg.recv(1024 * 6))
 
-	#check if the correct data was fetched
-	if "success" not in getPeers_data and getSessions_data:
-		print "could not get data"
-		sys.exit(0)
-
 	#write all stats into an html filled markdown file(doesnt really need to be a markdown file, just what my site pulls in by default)
 	with open("/var/www/site/peers.md","w") as handle:
 		#write stats for connected peers here

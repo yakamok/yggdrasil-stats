@@ -7,7 +7,7 @@ This is how it looks styled with a css.
 
 ###ToDo:
 
-Make into standalone stats generator
+Make into standalone stats generator  
 add style sheet to make it look like the above  
 make as index.html  
 add in html body to the output  

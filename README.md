@@ -3,7 +3,7 @@
 ![peerstats](peerstats.png)
 
 This small program collects stats from yggdrasil admin api and turns it into html.  
-This is how it looks styled with a css.  
+This is how it looks styled with css.  
 
 ### ToDo:
 

@@ -1,9 +1,9 @@
 /* style sheet for peer-stats */
 body, input, textarea {
 	font-family: sans-serif;
- 	padding: 0;
- 	margin: 0;
- 	background-color: #F0F0F0;
+	padding: 0;
+	margin: 0;
+	background-color: #F0F0F0;
 }h3 {
 	font-size: 15px;
 	margin-bottom: 8px;
@@ -15,22 +15,22 @@ body, input, textarea {
 }#header {
 	margin-bottom:20px;
 	height:75px;
-	border-bottom:1px solid #C4C4C4;
 }.clear {
 	clear:both;
 }#title {
-	max-width:760px;
+	max-width:570px;
 	margin:0 auto;
-	font-size: 34px;
+	font-size: 24px;
 	padding-top:20px;
 	padding-bottom:20px;
 	font-weight: normal;
 	line-height: 40px;
+	border-bottom:1px solid #C4C4C4;
 }#title a {
 	text-decoration:none;
 	color:#000;
 }#wrapper {
-	max-width: 760px;
+	max-width: 570px;
 	margin: auto;
 	padding-left:20px;
 	padding-right:20px;
@@ -46,14 +46,14 @@ body, input, textarea {
 	margin-top:50px;
 	font-size:9px;
 }.col1 {
- width:40%;
- float:left; 
+	width:40%;
+	float:left; 
 }.col2 {
- width:20%;
- float:left; 
+	width:20%;
+	float:left; 
 }.col3 {
- width:20%;
- float:left; 
+	width:20%;
+	float:left; 
 }.col4 {
- width:20%;
- float:left; 
+	width:20%;
+	float:left; 

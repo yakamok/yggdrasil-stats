@@ -4,9 +4,29 @@ import json
 import datetime
 import sys
 
+root_dir = "" #location you want the index.html file to be placed
 updated = datetime.datetime.now()
 getPeers = '{"request": "getPeers","keepalive":true}'
-getSessions = '{"request": "getSessions"}'
+getSessions = '{"request": "getSessions","keepalive":true}'
+getSelf = "request":"getSelf"
+
+#create the html body
+html_body_aplha = '<!DOCTYPE html> \
+					<html> \
+					<head> \
+					<title>' + ipv6_self + '</title> \
+					<link rel="stylesheet" type="text/css" href="style.css"/> \
+					</head> \
+					<body> \
+					<div id="header"> \
+					<div id="title">' + ipv6_self + '</div> \
+					</div> \
+					<div id="wrapper"> '
+
+#end html body here
+html_body_omega = '</div> \
+				</body> \
+				</html>'
 
 def human_readable(bnum): # make bytes readable
 	data = int(bnum)
@@ -32,8 +52,9 @@ try:
 	getSessions_data = json.loads(ygg.recv(1024 * 6))
 
 	#write all stats into an html filled markdown file(doesnt really need to be a markdown file, just what my site pulls in by default)
-	with open("/var/www/site/pages/peers.md","w") as handle:
+	with open(root_dir + "index.html","w") as handle:
 		#write stats for connected peers here
+		handle.write(html_body)
 		handle.write("<h3>Connected Peers</h3>  ")
 		for x in getPeers_data['response']['peers']:
 			#filter out out your own node
@@ -52,6 +73,7 @@ try:
 						'<div class="col2">Coords: ' + str(getSessions_data['response']['sessions'][x]['coords']) + '</div><div class="clear"></div></div>')
 		#last updated time added here
 		handle.write('<div class="updated">Last updated: ' + str(updated) + '</div>')
+		handle.write(html_body_omega)
 
 except:
 	print "failed to connect to admin sockect"

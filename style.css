@@ -5,15 +5,9 @@ body, input, textarea {
 	margin: 0;
 	background-color: #F0F0F0;
 }h3 {
-	font-size: 15px;
-	margin-bottom: 8px;
-	line-height:40px;
-}p {
-	font-size: 14px;
-	color:#333;
-	line-height:25px;
+	margin-top:30px;
+	font-size: 16px;
 }#header {
-	margin-bottom:20px;
 	height:75px;
 }.clear {
 	clear:both;
@@ -23,28 +17,23 @@ body, input, textarea {
 	font-size: 24px;
 	padding-top:20px;
 	padding-bottom:20px;
-	font-weight: normal;
-	line-height: 40px;
 	border-bottom:1px solid #C4C4C4;
-}#title a {
-	text-decoration:none;
-	color:#000;
 }#wrapper {
 	max-width: 570px;
 	margin: auto;
-	padding-left:20px;
-	padding-right:20px;
 }.peer {
 	border-bottom:solid 1px #c4c4c4;
 	font-size:14px;
+	padding-bottom:3px;
 	margin-bottom:4px;
 }.data {
-	font-size:12px;
+	font-size:11px;
 	margin-bottom:15px;
 	color:#4f4f4f;
 }.updated {
 	margin-top:50px;
-	font-size:9px;
+	font-size:10px;
+	color:#4f4f4f;
 }.col1 {
 	width:40%;
 	float:left; 

@@ -10,7 +10,7 @@ $getSelf = '{"request":"getSelf"}';
 
 // open socket
 $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
-$result = socket_connect($socket, $host, $port) or die("Could not connect toserver\n");
+$result = socket_connect($socket, $host, $port) or die("Could not connect to server\n");
 
 // getPeers request
 socket_write($socket, $getPeers, strlen($getPeers)) or die("Could not send data to server\n");

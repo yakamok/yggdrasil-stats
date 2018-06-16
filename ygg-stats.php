@@ -67,7 +67,7 @@ foreach ($getPeers_json_array{"response"}{"peers"} as $key => $value) {
 		echo '<div class="data"><div class="col1">' . secondsToTime((int)$value{"uptime"}) . '</div>';
 		echo '<div class="col2">Rx: ' . humanFileSize($value{"bytes_recvd"}) . '</div>';
 		echo '<div class="col2">Tx: ' . humanFileSize($value{"bytes_sent"}). '</div>';
-		echo '<div class="col2">' . $value{"port"} . '</div>';
+		echo '<div class="col2">Port: ' . $value{"port"} . '</div>';
 		echo '<div class="clear"></div></div>';
 	}
 }
@@ -78,7 +78,7 @@ foreach ($getSessions_json_array{"response"}{"sessions"} as $key => $value) {
 	echo '<div class="data">';
 	echo '<div class="col2">Rx: ' . humanFileSize($value{"bytes_recvd"}) . '</div>';
 	echo '<div class="col2">Tx: ' . humanFileSize($value{"bytes_sent"}) . '</div>';
-	echo '<div class="col2">' . $value{"coords"} . '</div>';
+	echo '<div class="col2">Coords: ' . $value{"coords"} . '</div>';
 	echo '<div class="clear"></div></div>';
 }
 ?>

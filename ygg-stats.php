@@ -62,7 +62,7 @@ function secondsToTime($seconds) {
 <?php
 // getPeers display and oragnise data pretty here
 foreach ($getPeers_json_array{"response"}{"peers"} as $key => $value) {
-	if ($value{"port"} != 0) {
+	if ($value{"port"}) {
 		echo '<div class="peer">' . $key . '</div>';
 		echo '<div class="data"><div class="col1">' . secondsToTime((int)$value{"uptime"}) . '</div>';
 		echo '<div class="col2">Rx: ' . humanFileSize($value{"bytes_recvd"}) . '</div>';

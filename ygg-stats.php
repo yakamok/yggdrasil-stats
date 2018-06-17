@@ -46,7 +46,6 @@ function secondsToTime($seconds) {
     return $dtF->diff($dtT)->format('%a days, %h:%i.%s');
 }
 ?>
-<!-- body of starts here -->
 <!DOCTYPE html>
 <html>
 <head>

@@ -54,8 +54,7 @@ try:
     this_node = json.loads(ygg.recv(1024 * 6))
     print this_node['response']['self'].keys()[0]
 
-    #write all stats into an html filled markdown file(doesnt really need to be a markdown file,
-    #just what my site pulls in by default)
+    #write to index.html
     with open(root_dir + "index.html", "w") as handle:
         handle.write(str(html_body_alpha(this_node['response']['self'].keys()[0])))
         handle.write("<h3>Connected Peers</h3>\n  ")

@@ -26,8 +26,30 @@ function check_if_update_needed(){
 
 
 function parse_nodelist() {
-	$raw_nodes = file_get_contents("nodelist.txt");
+	$data = array();
+	$raw_nodes = explode("\n", file_get_contents("nodelist.txt"));
+	foreach ($raw_nodes as &$value) {
+		if ($value) {
+			$tempy = explode(" ", $value);
+			$data[$tempy[1]] = $tempy[0];
+		}
+	}
+	return $data;
 }
+
+
+function nodelist_index($key, $nodelist) {
+	if (in_array($key, $nodelist)) {
+		echo '<div class="item"><span class="name">' .
+				array_search($key, $nodelist) . 
+				'</span><span class="keylabel">' .
+				$key .
+				'</span></div>';
+	}else {
+		echo $key;
+	}
+}
+
 
 // convert bytes to something human readable
 function humanFileSize($size,$unit="") {
@@ -54,8 +76,9 @@ $getSessions = '{"request": "getSessions","keepalive":true}';
 $getSelf = '{"request":"getSelf"}';
 
 // check if nodelist.txt exists and if it needs updated or created
-updateNodeList();
 check_if_update_needed();
+$nodelist_array = parse_nodelist();
+
 // open socket
 $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
 $result = socket_connect($socket, $host, $port) or die("Could not connect toserver\n");
@@ -87,7 +110,7 @@ $getPeers_json_array = json_decode($gpeers, true);
 </head>
 <body>
 <div id="header">
-	<div id="title"><?php echo key($getSelf_json_array{"response"}{"self"}); ?></div>
+	<div id="title"><?php echo nodelist_index(key($getSelf_json_array{"response"}{"self"}), $nodelist_array); ?></div>
 </div>
 <div id="wrapper">
 <h3>Connected Peers</h3>
@@ -95,7 +118,7 @@ $getPeers_json_array = json_decode($gpeers, true);
 // getPeers display and oragnise data pretty here
 foreach ($getPeers_json_array{"response"}{"peers"} as $key => $value) {
 	if ($value{"port"}) {
-		echo '<div class="peer">' . $key . '</div>';
+		echo '<div class="peer">' . nodelist_index($key, $nodelist_array) . '</div>';
 		echo '<div class="data"><div class="col1">' . secondsToTime((int)$value{"uptime"}) . '</div>';
 		echo '<div class="col2">Rx: ' . humanFileSize($value{"bytes_recvd"}) . '</div>';
 		echo '<div class="col2">Tx: ' . humanFileSize($value{"bytes_sent"}). '</div>';
@@ -106,7 +129,7 @@ foreach ($getPeers_json_array{"response"}{"peers"} as $key => $value) {
 echo '<h3>Current Sessions</h3>';
 // getSessions display and oragnise data pretty here
 foreach ($getSessions_json_array{"response"}{"sessions"} as $key => $value) {
-	echo '<div class="peer">' . $key . '</div>';
+	echo '<div class="peer">' . nodelist_index($key, $nodelist_array) . '</div>';
 	echo '<div class="data">';
 	echo '<div class="col2">Rx: ' . humanFileSize($value{"bytes_recvd"}) . '</div>';
 	echo '<div class="col2">Tx: ' . humanFileSize($value{"bytes_sent"}) . '</div>';

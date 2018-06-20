@@ -12,12 +12,15 @@ $getSelf = '{"request":"getSelf"}';
 $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
 $result = socket_connect($socket, $host, $port) or die("Could not connect to server\n");
 
+// if you have a large peer list and it stops showing results you may need to increase the bytes allowed
+// in getPeers socket receive and getSessions socket receive current value is 8192
+
 // getPeers request
 socket_write($socket, $getPeers, strlen($getPeers)) or die("Could not send data to server\n");
-$gpeers = socket_read ($socket, 1024) or die("Could not read server response\n");
+$gpeers = socket_read ($socket, 8192) or die("Could not read server response\n");
 // getSessions
 socket_write($socket, $getSessions, strlen($getSessions)) or die("Could not send data to server\n");
-$gsessions = socket_read ($socket, 1024) or die("Could not read server response\n");
+$gsessions = socket_read ($socket, 8192) or die("Could not read server response\n");
 // getSelf
 socket_write($socket, $getSelf, strlen($getSelf)) or die("Could not send data to server\n");
 $gself = socket_read ($socket, 1024) or die("Could not read server response\n");

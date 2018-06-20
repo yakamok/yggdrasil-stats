@@ -40,18 +40,19 @@ def human_readable(bnum): # make bytes readable
 
 try:
     ygg = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    ygg.connect(('localhost', 9001))
-
+    ygg.connect(('localhost', 9001)
+                
+  
   #fetch peer data
     ygg.send(getPeers)
-    getPeers_data = json.loads(ygg.recv(1024 * 6))
+    getPeers_data = json.loads(ygg.recv(1024 * 8))
 
   #fetch session data
     ygg.send(getSessions)
-    getSessions_data = json.loads(ygg.recv(1024 * 6))
+    getSessions_data = json.loads(ygg.recv(1024 * 8))
 
     ygg.send(getSelf)
-    this_node = json.loads(ygg.recv(1024 * 6))
+    this_node = json.loads(ygg.recv(1024 * 2))
     print this_node['response']['self'].keys()[0]
 
     #write to index.html

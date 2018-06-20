@@ -31,9 +31,11 @@ body, input, textarea {
 	padding-bottom:3px;
 	margin-bottom:4px;
 }.data {
-	font-size:11px;
+	font-size:12px;
 	margin-bottom:15px;
 	color:#4f4f4f;
+	padding-bottom:4px;
+	border-bottom:solid 1px #c4c4c4;
 }.updated {
 	margin-top:50px;
 	font-size:10px;
@@ -44,4 +46,14 @@ body, input, textarea {
 }.col2 {
 	width:20%;
 	float:left; 
+}
+/*change to ipv6 on hover*/
+span.keylabel{$
+ display:none;$
+}
+.item:hover span.name{
+ display:none;
+}
+.item:hover span.keylabel{
+ display:block;
 }

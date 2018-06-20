@@ -4,33 +4,30 @@ $port = 9001;
 
 set_time_limit(2);
 
-$getPeers = '{"request": "getPeers","keepalive":true}';
-$getSessions = '{"request": "getSessions","keepalive":true}';
-$getSelf = '{"request":"getSelf"}';
+//get the latest nodelist and save to file
+function updateNodeList(){
+	$raw_node_file = file_get_contents('https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist') or die("Unable to fetch file!");
+	$myfile = fopen("nodelist.txt", "w") or die("Unable to open file!");
+	fwrite($myfile, $raw_node_file);
+	fclose($myfile);
+}
 
-// open socket
-$socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
-$result = socket_connect($socket, $host, $port) or die("Could not connect to server\n");
 
-// if you have a large peer list and it stops showing results you may need to increase the bytes allowed
-// in getPeers socket receive and getSessions socket receive current value is 8192
+// check file age if over 2hrs update
+function check_if_update_needed(){
+	if (file_exists("nodelist.txt")) {
+		if (time()-filemtime("nodelist.txt") > 600) {
+			updateNodeList();
+		}
+	}else {
+		updateNodeList();
+	}
+}
 
-// getPeers request
-socket_write($socket, $getPeers, strlen($getPeers)) or die("Could not send data to server\n");
-$gpeers = socket_read ($socket, 8192) or die("Could not read server response\n");
-// getSessions
-socket_write($socket, $getSessions, strlen($getSessions)) or die("Could not send data to server\n");
-$gsessions = socket_read ($socket, 8192) or die("Could not read server response\n");
-// getSelf
-socket_write($socket, $getSelf, strlen($getSelf)) or die("Could not send data to server\n");
-$gself = socket_read ($socket, 1024) or die("Could not read server response\n");
-// make sure connection is closed
-socket_close($socket);
 
-// convert to arrays
-$getSelf_json_array = json_decode($gself, true);
-$getSessions_json_array = json_decode($gsessions, true);
-$getPeers_json_array = json_decode($gpeers, true);
+function parse_nodelist() {
+	$raw_nodes = file_get_contents("nodelist.txt");
+}
 
 // convert bytes to something human readable
 function humanFileSize($size,$unit="") {
@@ -42,13 +39,46 @@ function humanFileSize($size,$unit="") {
     return number_format($size/(1<<10),2)."KB";
   return number_format($size)." bytes";
 }
+
+
 // convert seconds to human readable time
 function secondsToTime($seconds) {
     $dtF = new \DateTime('@0');
     $dtT = new \DateTime("@$seconds");
     return $dtF->diff($dtT)->format('%a days, %h:%i.%s');
 }
+
+
+$getPeers = '{"request": "getPeers","keepalive":true}';
+$getSessions = '{"request": "getSessions","keepalive":true}';
+$getSelf = '{"request":"getSelf"}';
+
+// check if nodelist.txt exists and if it needs updated or created
+updateNodeList();
+check_if_update_needed();
+// open socket
+$socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
+$result = socket_connect($socket, $host, $port) or die("Could not connect toserver\n");
+
+// getPeers request
+socket_write($socket, $getPeers, strlen($getPeers)) or die("Could not send data to server\n");
+$gpeers = socket_read ($socket, 8024) or die("Could not read server response\n");
+// getSessions
+socket_write($socket, $getSessions, strlen($getSessions)) or die("Could not send data to server\n");
+$gsessions = socket_read ($socket, 8024) or die("Could not read server response\n");
+// getSelf
+socket_write($socket, $getSelf, strlen($getSelf)) or die("Could not send data to server\n");
+$gself = socket_read ($socket, 2024) or die("Could not read server response\n");
+// make sure connection is closed
+socket_close($socket);
+
+// convert to arrays
+$getSelf_json_array = json_decode($gself, true);
+$getSessions_json_array = json_decode($gsessions, true);
+$getPeers_json_array = json_decode($gpeers, true);
+
 ?>
+<!-- body of starts here -->
 <!DOCTYPE html>
 <html>
 <head>

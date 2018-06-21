@@ -82,14 +82,14 @@ ygg.connect(('localhost', 9001))
 
 #fetch peer data
 ygg.send(GETPEERS)
-getPeers_data = json.loads(ygg.recv(1024 * 6))
+getPeers_data = json.loads(ygg.recv(1024 * 15))
 
 #fetch session data
 ygg.send(GETSESSIONS)
-getSessions_data = json.loads(ygg.recv(1024 * 6))
+getSessions_data = json.loads(ygg.recv(1024 * 15))
 
 ygg.send(GETSELF)
-this_node = json.loads(ygg.recv(1024 * 6))
+this_node = json.loads(ygg.recv(1024 * 3))
 
 #write all stats into an html filled markdown file(doesnt really need to be a markdown file,
 #just what my site pulls in by default)

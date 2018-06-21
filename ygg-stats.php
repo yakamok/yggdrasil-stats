@@ -10,7 +10,7 @@ $git_nodelist = "https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/m
 //get the latest nodelist and save to file
 function updateNodeList(){
 	if(file_exists($git_nodelist)) {
-		$raw_node_file = file_get_contents('https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist');
+		$raw_node_file = file_get_contents($git_nodelist);
 		$myfile = fopen("nodelist.txt", "w") or die("Unable to create file, please check permissions!");
 		fwrite($myfile, $raw_node_file);
 		fclose($myfile);

@@ -8,12 +8,10 @@ set_time_limit(2);
 
 //get the latest nodelist and save to file
 function updateNodeList(){
-	if(file_exists("https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/master/nodelist")) {
-		$raw_node_file = file_get_contents("https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/master/nodelist");
-		$myfile = fopen("nodelist.txt", "w") or die("Unable to create file, please check permissions!");
-		fwrite($myfile, $raw_node_file);
-		fclose($myfile);
-	}
+	$raw_node_file = file_get_contents("https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist");
+	$myfile = fopen("nodelist.txt", "w+") or die("Unable to create file, please check permissions!");
+	fwrite($myfile, $raw_node_file);
+	fclose($myfile);
 }
 
 
@@ -87,8 +85,6 @@ $nodelist_array = parse_nodelist();
 $socket = socket_create(AF_INET, SOCK_STREAM, 0) or die("Could not create socket\n");
 $result = socket_connect($socket, $host, $port) or die("Could not connect toserver\n");
 
-// side note, if you end up with a massive peer list and no peers
-// displaying anymore it means you need to increase the socket_read ($socket, n) buffer.
 // getPeers request
 socket_write($socket, $getPeers, strlen($getPeers)) or die("Could not send data to server\n");
 $gpeers = socket_read ($socket, 8024) or die("Could not read server response\n");

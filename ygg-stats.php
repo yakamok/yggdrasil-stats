@@ -4,9 +4,12 @@ $port = 9001;
 
 set_time_limit(2);
 
+// please change this to http://git.h-ic.eu/yakamo/yggdrasil-nodelist/raw/master/nodelist if you want to use yggdrasil git
+$git_nodelist = "https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/master/nodelist"
+
 //get the latest nodelist and save to file
 function updateNodeList(){
-	if(file_exists("https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/master/nodelist")) {
+	if(file_exists($git_nodelist)) {
 		$raw_node_file = file_get_contents('https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist');
 		$myfile = fopen("nodelist.txt", "w") or die("Unable to create file, please check permissions!");
 		fwrite($myfile, $raw_node_file);
@@ -18,7 +21,7 @@ function updateNodeList(){
 // check file age if over 2hrs update
 function check_if_update_needed(){
 	if (file_exists("nodelist.txt")) {
-		if (time()-filemtime("nodelist.txt") > 600) {
+		if (time()-filemtime("nodelist.txt") > 10) {
 			updateNodeList();
 		}
 	}else {

@@ -18,7 +18,7 @@ function updateNodeList(){
 // check file age if over 2hrs update
 function check_if_update_needed(){
 	if (file_exists("nodelist.txt")) {
-		if (time()-filemtime("nodelist.txt") > 10) {
+		if (time()-filemtime("nodelist.txt") > 600) {
 			updateNodeList();
 		}
 	}else {

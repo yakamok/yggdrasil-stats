@@ -4,27 +4,27 @@ $port = 9001;
 
 set_time_limit(2);
 
-
 //get the latest nodelist and save to file
 function updateNodeList(){
-	$raw_node_file = file_get_contents('https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist') or die("Unable to fetch file!");
-	$myfile = fopen("nodelist.txt", "w") or die("Unable to open file!");
-	fwrite($myfile, $raw_node_file);
-	fclose($myfile);
+	if(file_exists("https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/master/nodelist")) {
+		$raw_node_file = file_get_contents('https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist');
+		$myfile = fopen("nodelist.txt", "w") or die("Unable to create file, please check permissions!");
+		fwrite($myfile, $raw_node_file);
+		fclose($myfile);
+	}
 }
 
 
 // check file age if over 2hrs update
 function check_if_update_needed(){
 	if (file_exists("nodelist.txt")) {
-		if (time()-filemtime("nodelist.txt") > 600) {
+		if (time()-filemtime("nodelist.txt") > 10) {
 			updateNodeList();
 		}
 	}else {
 		updateNodeList();
 	}
 }
-
 
 // open file and create array
 function parse_nodelist() {
@@ -39,15 +39,14 @@ function parse_nodelist() {
 	return $data;
 }
 
-
 // check to see if ipv6 is in the nodelist and return an alias
 function nodelist_index($key, $nodelist) {
 	if (in_array($key, $nodelist)) {
 		echo '<div class="item"><span class="name">' .
-				array_search($key, $nodelist) . 
-				'</span><span class="keylabel">' .
-				$key .
-				'</span></div>';
+			array_search($key, $nodelist) . 
+			'</span><span class="keylabel">' .
+			$key .
+			'</span></div>';
 	}else {
 		echo $key;
 	}
@@ -89,15 +88,12 @@ $result = socket_connect($socket, $host, $port) or die("Could not connect toserv
 // getPeers request
 socket_write($socket, $getPeers, strlen($getPeers)) or die("Could not send data to server\n");
 $gpeers = socket_read ($socket, 8024) or die("Could not read server response\n");
-
 // getSessions
 socket_write($socket, $getSessions, strlen($getSessions)) or die("Could not send data to server\n");
 $gsessions = socket_read ($socket, 8024) or die("Could not read server response\n");
-
 // getSelf
 socket_write($socket, $getSelf, strlen($getSelf)) or die("Could not send data to server\n");
 $gself = socket_read ($socket, 2024) or die("Could not read server response\n");
-
 // make sure connection is closed
 socket_close($socket);
 
@@ -121,7 +117,6 @@ $getPeers_json_array = json_decode($gpeers, true);
 <div id="wrapper">
 <h3>Connected Peers</h3>
 <?php
-
 // getPeers display and oragnise data pretty here
 foreach ($getPeers_json_array{"response"}{"peers"} as $key => $value) {
 	if ($value{"port"}) {
@@ -134,7 +129,6 @@ foreach ($getPeers_json_array{"response"}{"peers"} as $key => $value) {
 	}
 }
 echo '<h3>Current Sessions</h3>';
-
 // getSessions display and oragnise data pretty here
 foreach ($getSessions_json_array{"response"}{"sessions"} as $key => $value) {
 	echo '<div class="peer">' . nodelist_index($key, $nodelist_array) . '</div>';

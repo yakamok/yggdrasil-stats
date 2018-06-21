@@ -5,7 +5,7 @@ $port = 9001;
 set_time_limit(2);
 
 // please change this to http://git.h-ic.eu/yakamo/yggdrasil-nodelist/raw/master/nodelist if you want to use yggdrasil git
-$git_nodelist = "https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/master/nodelist"
+$git_nodelist = "https://raw.githubusercontednt.com/yakamok/yggdrasil-nodelist/master/nodelist";
 
 //get the latest nodelist and save to file
 function updateNodeList(){

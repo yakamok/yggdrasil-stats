@@ -80,6 +80,8 @@ except:
 ygg = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ygg.connect(('localhost', 9001))
 
+#side note, if you end up with a massive peer list and no peers
+#display anymore it means you need to increase the ygg.recv() buffer.
 #fetch peer data
 ygg.send(GETPEERS)
 getPeers_data = json.loads(ygg.recv(1024 * 15))

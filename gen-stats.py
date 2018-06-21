@@ -3,15 +3,18 @@ import json
 import datetime
 import requests
 
-ROOTDIR = "/var/www/links.yakamo.org/test/" #location you want the index.html file to be placed
+ROOTDIR = "/var/www/" #location you want the index.html file to be placed
 CURRENTTIME = datetime.datetime.now()
 GETPEERS = '{"request": "getPeers","keepalive":true}'
 GETSESSIONS = '{"request": "getSessions","keepalive":true}'
 GETSELF = '{"request":"getSelf"}'
 
+#uncomment below to fetch node list from yggdrasil mirror, remeber to comment out the original repo
+# GIT_REPO = "http://git.h-ic.eu/yakamo/yggdrasil-nodelist/raw/master/nodelist"
+GIT_REPO = "https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist"
 
 def get_nodelist():
-    data = requests.get("https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist")
+    data = requests.get(GIT_REPO)
     nodes = [x.split() for x in data.text.split('\n') if x]
     
     index_table = {}

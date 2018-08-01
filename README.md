@@ -6,7 +6,7 @@ Yggdrasil-stats is for displaying connected peers and ongoing sessions in a pret
 
 ### gen-stats.py 
 
-Just add to crontab and run once a minute or more its up to you:  
+Just add to crontab and run once an hour:  
 */1 * * * * python ygg-stats.py  
 
 Make sure to change in the program 'root_dir = "/var/www/" ' to where you want index.html to be saved. Don't forget to save style.css in the same folder that the index.html will live.  

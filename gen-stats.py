@@ -8,9 +8,6 @@ CURRENTTIME = datetime.datetime.now()
 GETPEERS = '{"request": "getPeers","keepalive":true}'
 GETSESSIONS = '{"request": "getSessions","keepalive":true}'
 GETSELF = '{"request":"getSelf"}'
-
-#uncomment below to fetch node list from yggdrasil mirror, remeber to comment out the original repo
-# GIT_REPO = "http://git.h-ic.eu/yakamo/yggdrasil-nodelist/raw/master/nodelist"
 GIT_REPO = "https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist"
 
 def get_nodelist():

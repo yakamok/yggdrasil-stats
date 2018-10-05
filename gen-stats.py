@@ -90,8 +90,6 @@ getSessions_data = json.loads(ygg.recv(1024 * 15))
 ygg.send(GETSELF)
 this_node = json.loads(ygg.recv(1024 * 3))
 
-#write all stats into an html filled markdown file(doesnt really need to be a markdown file,
-#just what my site pulls in by default)
 with open(ROOTDIR + "index.html", "w") as handle:
     handle.write(str(html_alpha(this_node['response']['self'].keys()[0])))
     handle.write("<h3>Connected Peers</h3>\n  ")

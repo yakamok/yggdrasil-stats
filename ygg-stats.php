@@ -4,6 +4,8 @@ $port = 9001;
 
 set_time_limit(2);
 
+// please change this to http://git.h-ic.eu/yakamo/yggdrasil-nodelist/raw/master/nodelist if you want to use yggdrasil git
+
 //get the latest nodelist and save to file
 function updateNodeList(){
 	$raw_node_file = file_get_contents("https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist");
@@ -113,6 +115,13 @@ $getPeers_json_array = json_decode($gpeers, true);
 	<div id="title"><?php echo nodelist_index(key($getSelf_json_array{"response"}{"self"}), $nodelist_array); ?></div>
 </div>
 <div id="wrapper">
+
+<span class="statcount">
+<?php
+	echo "Connected Peers: " . count($getPeers_json_array{"response"}{"peers"}) . " - ";
+	echo "Current Sessions: " . count($getSessions_json_array{"response"}{"sessions"});
+?>
+</span>
 <h3>Connected Peers</h3>
 <?php
 // getPeers display and oragnise data pretty here

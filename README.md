@@ -8,8 +8,6 @@ This works with Version 0.2.7, if you want it to work with v0.3 make sure AdminL
 
     tcp://localhost:9001
 
-This will change with the next release of Yggdrasil-Stats and be detected automaticaly.  
-
 ### gen-stats.py 
 
 Just add to crontab and run once an hour:  

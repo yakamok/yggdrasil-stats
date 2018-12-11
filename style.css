@@ -25,17 +25,19 @@ body, input, textarea {
 }#wrapper {
  max-width: 570px;
  margin: auto;
+ padding-bottom:30px;
 }.peer {
  border-bottom:solid 1px #c4c4c4;
  font-size:14px;
  padding-bottom:3px;
- margin-bottom:4px;
 }.data {
  font-size:12px;
  margin-bottom:15px;
  color:#4f4f4f;
  padding-bottom:4px;
  border-bottom:solid 1px #c4c4c4;
+ background-color: #f4f4f4;
+ padding-top: 4px;
 }.updated {
  margin-top:50px;
  font-size:10px;
@@ -59,4 +61,3 @@ span.keylabel{
 }.statcount {
  font-size:11px;	
 }
-

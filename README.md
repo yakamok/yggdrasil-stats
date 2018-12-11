@@ -21,3 +21,4 @@ Yggdrasil stats will make a request to a [nodelist](https://github.com/yakamok/y
 
 ### ToDo:
 
+add unix socket support  

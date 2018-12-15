@@ -23,6 +23,12 @@ This is simpler if you have an already php friendly enviroment setup on your ser
 
 Yggdrasil stats will make a request to a [nodelist](https://github.com/yakamok/yggdrasil-nodelist) to check if there are domains assotiated with the ipv6 address and show it instead, you can add your own for your ipv6 address by forking the repo and making a pull request with your change(s).  
 
+### css-themes
+
+If your interested in creating themes for the stats page your welcome to submit a pull request to have your theme added, please use the following naming convention:  
+
+        style-themename-username.css
+
 ### ToDo:
 
 add unix socket support  

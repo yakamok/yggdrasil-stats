@@ -28,6 +28,8 @@ Yggdrasil stats will make a request to a [nodelist](https://github.com/yakamok/y
 If your interested in creating themes for the stats page your welcome to submit a pull request to have your theme added, please use the following naming convention:  
 
         style-themename-username.css
+        
+When you download the theme of your choice and place it in the same folder as index.php rename it to style.css, or rename it in index.php to match.  
 
 ### ToDo:
 

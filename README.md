@@ -34,3 +34,5 @@ When you download the theme of your choice and place it in the same folder as in
 ### ToDo:
 
 add unix socket support  
+add api for domain support  
+

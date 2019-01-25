@@ -6,10 +6,15 @@ set_time_limit(2);
 
 //get the latest nodelist and save to file
 function updateNodeList(){
-	$raw_node_file = file_get_contents("https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist");
-	$myfile = fopen("nodelist.txt", "w+") or die("Unable to create file, please check permissions!");
-	fwrite($myfile, $raw_node_file);
-	fclose($myfile);
+        $raw_node_file = file_get_contents("http://y.yakamo.org:3000/current");
+        $nodelist_api_pull = json_decode($raw_node_file, true);
+        $myfile = fopen("nodelist.txt", "w+") or die("Unable to create file, please check permissions!");
+	        foreach ($nodelist_api_pull{"yggnodes"} as $key => $value) {
+	                if(count($value) === 3){
+	                        fwrite($myfile, $key . " " . $value{2} . "\n");
+	                }
+	        }
+        fclose($myfile);
 }
 
 
@@ -24,6 +29,7 @@ function check_if_update_needed(){
 	}
 }
 
+
 // open file and create array
 function parse_nodelist() {
 	$data = array();
@@ -36,6 +42,7 @@ function parse_nodelist() {
 	}
 	return $data;
 }
+
 
 // check to see if ipv6 is in the nodelist and return an alias
 function nodelist_index($key, $nodelist) {

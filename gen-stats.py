@@ -16,6 +16,8 @@ def get_nodelist():
 
     for x,y in data["yggnodes"].iteritems():
  	    if len(y) == 3:
+ 	    	ysan = y[2].replace("-", "").replace(".", "")
+ 	    	if ysan.isalnum():
 			index_table[x] = y[2]
 
     return index_table

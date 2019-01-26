@@ -8,16 +8,16 @@ CURRENTTIME = datetime.datetime.now()
 GETPEERS = '{"request": "getPeers","keepalive":true}'
 GETSESSIONS = '{"request": "getSessions","keepalive":true}'
 GETSELF = '{"request":"getSelf"}'
-GIT_REPO = "https://raw.githubusercontent.com/yakamok/yggdrasil-nodelist/master/nodelist"
 
 def get_nodelist():
-    data = requests.get(GIT_REPO)
-    nodes = [x.split() for x in data.text.split('\n') if x]
-    
+    data = requests.get("http://y.yakamo.org:3000/current").json()
+
     index_table = {}
 
-    for x in nodes:
-        index_table[x[0]] = x[1]
+    for x,y in data["yggnodes"].iteritems():
+ 	    if len(y) == 3:
+			index_table[x] = y[2]
+
     return index_table
 
 

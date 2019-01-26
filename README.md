@@ -25,7 +25,7 @@ Yggdrasil stats will make a request to a [nodelist](https://github.com/yakamok/y
 
 ### css-themes
 
-If your interested in creating themes for the stats page your welcome to submit a pull request to have your theme added, please use the following naming convention:  
+There is the deafult style.css that comes with yggdrasil-stats and there is a folder of custom themes. If your interested in creating themes for the stats page your welcome to submit a pull request to have your theme added, please use the following naming convention:  
 
         style-themename-username.css
         

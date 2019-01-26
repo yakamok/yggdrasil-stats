@@ -8,14 +8,16 @@ set_time_limit(2);
 function updateNodeList(){
         $raw_node_file = file_get_contents("http://y.yakamo.org:3000/current");
         $nodelist_api_pull = json_decode($raw_node_file, true);
+        $replace_non_alnum = array("-", ".");
         $myfile = fopen("nodelist.txt", "w+") or die("Unable to create file, please check permissions!");
-	        foreach ($nodelist_api_pull{"yggnodes"} as $key => $value) {
-	                if(count($value) === 3){
-	                        fwrite($myfile, $key . " " . $value{2} . "\n");
-	                }
-	        }
+                foreach ($nodelist_api_pull{"yggnodes"} as $key => $value) {
+                        if(count($value) === 3){
+                                if (ctype_alnum(str_replace($replace_non_alnum, "", $value{2}))) {
+                               		fwrite($myfile, $key . " " . $value{2} . "\n");
+                                                }
+                        }
+                }
         fclose($myfile);
-}
 
 
 // check file age if over 2hrs update

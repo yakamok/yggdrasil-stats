@@ -27,7 +27,7 @@ def check_nodelist(nodetable, key):
             result = '<div class="item"><span class="name">' + nodetable.get(key) + '</span>\
                     <span class="keylabel">' + key + '</span></div>'
         else:
-            result = key
+            result = <span class="keya">' + key + '</span>
         return result
     else:
         return key

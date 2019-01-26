@@ -1,6 +1,6 @@
 # yggdrasil-stats
 
-![peerstats](peerstats.png)  
+![peerstats](stats.png)  
 
 Yggdrasil-stats is for displaying connected peers and ongoing sessions in a pretty format.  
 

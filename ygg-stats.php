@@ -94,10 +94,10 @@ $result = socket_connect($socket, $host, $port) or die("Could not connect toserv
 
 // getPeers request
 socket_write($socket, $getPeers, strlen($getPeers)) or die("Could not send data to server\n");
-$gpeers = socket_read ($socket, 8024) or die("Could not read server response\n");
+$gpeers = socket_read ($socket, 20024) or die("Could not read server response\n");
 // getSessions
 socket_write($socket, $getSessions, strlen($getSessions)) or die("Could not send data to server\n");
-$gsessions = socket_read ($socket, 8024) or die("Could not read server response\n");
+$gsessions = socket_read ($socket, 20024) or die("Could not read server response\n");
 // getSelf
 socket_write($socket, $getSelf, strlen($getSelf)) or die("Could not send data to server\n");
 $gself = socket_read ($socket, 2024) or die("Could not read server response\n");

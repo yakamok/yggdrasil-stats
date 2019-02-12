@@ -83,7 +83,7 @@ ygg.connect(('localhost', 9001))
 #display anymore it means you need to increase the ygg.recv() buffer.
 #fetch peer data
 ygg.send(GETPEERS)
-getPeers_data = json.loads(ygg.recv(1024 * 15))
+getPeers_data = json.loads(ygg.recv(1024 * 50))
 
 #fetch session data
 ygg.send(GETSESSIONS)
